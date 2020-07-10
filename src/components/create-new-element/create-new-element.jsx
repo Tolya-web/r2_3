@@ -3,17 +3,24 @@ import "./create-new-element.scss";
 
 class CreateNewElement extends React.Component {
   state = {
-    label: "123123",
+    label: "",
   };
   onChange = (e) => {
-    console.log(e.target.value);
     this.setState({
       label: e.target.value,
     });
   };
+  onSubmit = (e) => {
+    e.preventDefault();
+    this.props.onAdded(this.state.label);
+    this.setState({
+      label: "",
+    });
+  };
+
   render() {
     return (
-      <form className="new-task">
+      <form className="new-task" onSubmit={this.onSubmit}>
         <input
           type="text"
           id="new-task-input"

@@ -2,52 +2,40 @@ import React, { Component } from "react";
 import "./todo-list-item.scss";
 
 class ToDoListItem extends Component {
-  /*constructor() {
-    super();
-    this.state = {
-      doneOk: false,
-    };
-  }*/
-  state = {
+  /* state = {
     doneOk: false,
-  };
+  };*/
   render() {
-    console.log(this.state);
-    const { message } = this.props;
+    const { message, done, important } = this.props;
     let classNameText = " task-text ";
 
     let clickHandler = () => {
+      this.props.onToggle();
       /*  this.state.doneOk = true;
       console.log(this.state);*/
-      this.setState(
-        /*{
-        doneOk: true,
-      }*/
+      /*    this.setState(
         (prevState) => {
           return {
-            doneOk: !prevState.doneOk,
+            done: !prevState.done,
           };
         }
-      );
+      );*/
     };
 
     let removeHandler = () => {
       this.props.onDelete();
     };
 
-    if (this.state.doneOk) {
+    if (done) {
       classNameText += " task_is_done";
     }
 
     let clickHand = () => {
-      this.setState((prevState) => {
-        return {
-          impOk: !prevState.impOk,
-        };
-      });
+      this.props.onImportant();
+      //  this.props.important = !this.props.important;
     };
 
-    if (this.state.impOk) {
+    if (important) {
       classNameText += " taskisdone";
     }
 
@@ -79,30 +67,5 @@ class ToDoListItem extends Component {
     );
   }
 }
-
-/*const ToDoListItem = (props) => {
-  console.log(state);
-  const { message } = props;
-  let classNameText = "task-text";
-  let clickHandler = () => {
-    console.log(message);
-  };
-  return (
-    <div className="task-item">
-      <span
-        className={classNameText}
-        onClick={() => {
-          clickHandler();
-        }}
-      >
-        {message}
-      </span>
-      <div className="controls">
-        <i className="fa fa-trash" />
-        <i className="fa fa-star" />
-      </div>
-    </div>
-  );
-};*/
 
 export default ToDoListItem;
